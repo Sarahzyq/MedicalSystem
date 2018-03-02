@@ -1,0 +1,63 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
+from django.db import models
+
+# Create your models here.
+class PatientBasicInfo(models.Model):
+    ID = models.IntegerField(primary_key=True)
+    Name = models.CharField('姓名',max_length=50)
+    Birthday = models.DateField('生日',blank=True,null=True)
+    Age = models.IntegerField('年龄')
+    Gender = models.IntegerField('性别')
+    Marriage = models.IntegerField('婚否',blank=True,null=True)
+    HomeTown = models.CharField('籍贯',blank=True,null=True,max_length=50)
+    Address = models.CharField('住址',blank=True,null=True,max_length=100)
+    Phone = models.IntegerField('电话',blank=True,null=True)
+    InputDate = models.DateTimeField('输入日期')
+    PiFuKeBingLiHao = models.IntegerField('皮肤科病历号')
+
+class BingLi(models.Model):
+    ID = models.IntegerField(primary_key=True)
+    SongJianRiQi = models.DateTimeField('送检日期')
+    XingMing = models.CharField('姓名',max_length=50)
+    NianLing = models.IntegerField('年龄')
+    XingBie = models.CharField('性别',max_length=10)
+    BuMen = models.CharField('部门',max_length=100)
+    LinChuangZhenDuan = models.CharField('临床诊断',max_length=1000)
+    QuCaiBuWei = models.CharField('取材部位',max_length=100)
+    SongJianYiShi = models.CharField('送检日期',max_length=100)
+    BaoGaoYiShi = models.CharField('报告医师',max_length=100)
+    Operator = models.CharField('操作医师',max_length=100)
+    BingLiHao = models.IntegerField('病历号')
+    JingXiaSuoJian = models.CharField('镜下所见',max_length=1000,blank=True,null=True)
+    BingLiZhenDuan = models.CharField('病理诊断',max_length=1000,blank=True,null=True)
+    BaoGaoRiQi = models.DateTimeField('报告日期',blank=True,null=True)
+    ZhuYuanHao = models.IntegerField('住院号',blank=True,null=True)
+    PatientID = models.ForeignKey(PatientBasicInfo,blank=True,null=True,on_delete=models.SET_NULL)
+
+class DigHistoryBasic(models.Model):
+    ID = models.IntegerField(primary_key=True)
+    XianBingShi = models.CharField('现病史',max_length=1000,blank=True,null=True)
+    JiWangShi = models.CharField('既往史',max_length=1000,blank=True,null=True,)
+    JiaZuShi = models.CharField('家族史',max_length=1000,blank=True,null=True,)
+    TiGeJianCha = models.CharField('体格检查',max_length=1000,blank=True,null=True)
+    LinChuangJianCha = models.CharField('临床检查',max_length=1000,blank=True,null=True)
+    ZhiLiao = models.CharField('治疗',max_length=1000,blank=True,null=True)
+    Sign = models.CharField('注册医师',max_length=1000)
+    PhotoNum = models.IntegerField('图像数量',blank=True,null=True)
+    PatientID = models.ForeignKey(PatientBasicInfo,blank=True,null=True,on_delete=models.SET_NULL)
+
+class Photo(models.Model):
+    ID = models.IntegerField(primary_key=True)
+    PhotoType = models.CharField('图像类型',max_length=100)
+    Photo = models.CharField('图像路径',max_length=100)
+    IdentifyID = models.CharField('定义ID',max_length=100)
+    Description = models.CharField('描述',max_length=1000,blank=True,null=True)
+    PatientID = models.ForeignKey(PatientBasicInfo,blank=True,null=True,on_delete=models.SET_NULL)
+
+class login(models.Model):
+    ID = models.AutoField(primary_key=True)
+    User = models.CharField('图像路径',max_length=100)
+    Password = models.CharField('图像路径',max_length=100)
+
