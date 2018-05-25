@@ -24,7 +24,8 @@ class PatientBasicInfo(models.Model):
 
 class BingLi(models.Model):
     id = models.IntegerField(db_column='ID', primary_key=True)  
-    patientid = models.ForeignKey('PatientBasicInfo', models.DO_NOTHING, db_column='PatientID')  
+    #patientid = models.ForeignKey('PatientBasicInfo', models.DO_NOTHING, db_column='PatientID')  
+    patientid = models.IntegerField(db_column='patientid', blank=True, null=True)
     songjianriqi = models.DateTimeField('送检日期',db_column='SongJianRiQi', blank=True, null=True)  
     xingming = models.CharField('姓名',db_column='XingMing', max_length=50, blank=True, null=True)  
     nianling = models.IntegerField('年龄',db_column='NianLing', blank=True, null=True)  
@@ -48,7 +49,8 @@ class BingLi(models.Model):
 
 class DiagHistoryBasic(models.Model):
     id = models.IntegerField(db_column='ID', primary_key=True)  
-    patientid = models.ForeignKey('PatientBasicInfo', models.DO_NOTHING, db_column='PatientID')  
+    #patientid = models.ForeignKey('PatientBasicInfo', models.DO_NOTHING, db_column='PatientID')  
+    patientid = models.IntegerField(db_column='patientid', blank=True, null=True)
     xianbingshi = models.CharField('现病史',db_column='XianBingShi', max_length=1000, blank=True, null=True)  
     jiwangshi = models.CharField('既往史',db_column='JiWangShi', max_length=1000, blank=True, null=True)  
     jiazushi = models.CharField('家族史',db_column='JiaZuShi', max_length=1000, blank=True, null=True)  
@@ -64,7 +66,8 @@ class DiagHistoryBasic(models.Model):
 
 class Photo(models.Model):
     id = models.IntegerField(db_column='ID', primary_key=True)  
-    patientid = models.ForeignKey(PatientBasicInfo, models.DO_NOTHING, db_column='PatientID')  
+    #patientid = models.ForeignKey('PatientBasicInfo', models.DO_NOTHING, db_column='PatientID')  
+    patientid = models.IntegerField(db_column='patientid', blank=True, null=True)
     phototype = models.CharField('图像类型',db_column='PhotoType', max_length=100, blank=True, null=True)  
     photo = models.CharField('图像路径',db_column='Photo', max_length=100, blank=True, null=True)  
     identifyid = models.CharField('定义ID',db_column='IdentifyID', max_length=100, blank=True, null=True)  
